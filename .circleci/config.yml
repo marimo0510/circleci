@@ -1,10 +1,10 @@
 version: 2
 jobs:
   build:
-    docker:
-      machine: true 
-      steps:
-        - checkout
-        - run:
+    machine: true 
+    steps:
+      - checkout
+      - run:
             name: docker-compose up
-            command: docker-compose -f ./nginx/docker-compose.yml up -d
+            command: |
+                docker-compose -f ./nginx/docker-compose.yml up -d
