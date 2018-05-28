@@ -7,6 +7,6 @@ jobs:
       - run:
             name: docker-compose up
             command: |
-                python3 -m pip install -r requirements.txt
+                pip install pytest requests
                 docker-compose -f ./nginx/docker-compose.yml up -d
                 pytest
