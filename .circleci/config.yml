@@ -1,7 +1,8 @@
 version: 2
 jobs:
   build:
-    machine: true 
+    docker:
+      - image: circleci/python
     steps:
       - checkout
       - run:
@@ -9,4 +10,15 @@ jobs:
             command: |
                 pip install pytest requests
                 docker-compose -f ./nginx/docker-compose.yml up -d
+      - run:
+            name: Test
+            command: |
                 pytest
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+
+
