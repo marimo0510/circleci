@@ -8,4 +8,4 @@ jobs:
             name: docker-compose up
             command: |
                 docker-compose -f ./nginx/docker-compose.yml up -d
-                curl localhost:8080
+                pytest
