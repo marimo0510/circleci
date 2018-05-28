@@ -11,7 +11,8 @@ jobs:
       - run:
             name: Test
             command: |
-                pytest
+              pip install pytest requests
+              pytest
 
 workflows:
   version: 2
