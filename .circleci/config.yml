@@ -1,7 +1,6 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/.
     docker:
       - image: circleci/python
     steps:
@@ -9,15 +8,15 @@ jobs:
       - run:
             name: docker-compose buid
             command: |
-                docker-compose -f ./docker-compose.yml build
+                docker-compose build
       - run:
             name: docker-compose up
             command: |
-                docker-compose -f ./docker-compose.yml up -d web
+                docker-compose up -d web
       - run:
             name: test
             command: |
-                docker-compose -f ./docker-compose.yml up -d pytest
+                docker-compose up -d pytest
 
 workflows:
   version: 2
