@@ -8,7 +8,6 @@ jobs:
       - run:
             name: docker-compose up
             command: |
-                pip install pytest requests
                 docker-compose -f ./nginx/docker-compose.yml up -d
       - run:
             name: Test
