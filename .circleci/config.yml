@@ -5,6 +5,7 @@ jobs:
       - image: circleci/python
     steps:
       - checkout
+      - setup_remote_docker:
       - run:
             name: up
             command: |
@@ -14,6 +15,7 @@ jobs:
       - image: circleci/python
     steps:
       - checkout
+      - setup_remote_docker:
       - run:
             name: test
             command: |
