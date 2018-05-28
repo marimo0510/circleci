@@ -14,7 +14,7 @@ jobs:
       - checkout
       - run:
             name: test
-            commend: |
+            command: |
                 docker-compose -f ./docker-compose.yml up -d pytest
 workflows:
   version: 2
