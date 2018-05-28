@@ -7,11 +7,11 @@ jobs:
       - run:
             name: docker-compose up
             command: |
-                docker-compose -f ./nginx/docker-compose.yml up -d web
+                docker-compose up -d web
       - run:
             name: test
             command: |
-                docker-compose -f ./nginx/docker-compose.yml up -d pytest
+                docker-compose up -d pytest
 
 workflows:
   version: 2
