@@ -15,7 +15,7 @@ jobs:
       - run:
             name: test
             commend: |
-                docker-compose -f .docker-compose.yml up -d pytest
+                docker-compose -f ./docker-compose.yml up -d pytest
 workflows:
   version: 2
   build_and_deploy:
