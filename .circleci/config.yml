@@ -1,12 +1,9 @@
 version: 2
 jobs:
   build:
-    docker:
-            - image: circleci/python:3
+    machine: true
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
       - run:
             name: docker-compose up
             command: |
