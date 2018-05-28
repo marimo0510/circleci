@@ -7,10 +7,10 @@ jobs:
       - checkout
       - setup_remote_docker:
             docker_layer_caching: true
-      - run:
-            name: docker-compose buid
-            command: |
-                docker-compose build
+            #- run:
+            #name: docker-compose buid
+            #command: |
+            #    docker-compose build
       - run:
             name: docker-compose up
             command: |
