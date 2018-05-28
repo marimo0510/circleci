@@ -9,6 +9,8 @@ jobs:
             command: |
                 docker-compose -f ./docker-compose.yml up -d web
   test:
+    machie: true
+    steps:
       - checkout
       - run:
             name: test
