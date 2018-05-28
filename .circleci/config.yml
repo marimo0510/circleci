@@ -4,7 +4,6 @@ jobs:
     machine: true
     steps:
       - checkout
-      - setup_remote_docker
       - run:
             name: up
             command: |
@@ -13,7 +12,6 @@ jobs:
     machine: true
     steps:
       - checkout
-      - setup_remote_docker
       - run:
             name: test
             command: |
