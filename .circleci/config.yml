@@ -5,6 +5,10 @@ jobs:
     steps:
       - checkout
       - run:
+            name: docker-compose buid
+            command: |
+                docker-compose build
+      - run:
             name: docker-compose up
             command: |
                 docker-compose up -d web
