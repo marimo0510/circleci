@@ -1,21 +1,17 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: circleci/python 
+    machine: true
     steps:
       - checkout
-      - setup_remote_docker
       - run:
             name: up
             command: |
                 docker-compose -f ./docker-compose.yml up -d web
   test:
-    docker:
-      - image: circleci/python 
+    machine: true
     steps:
       - checkout
-      - setup_remote_docker
       - run:
             name: test
             command: |
