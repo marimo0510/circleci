@@ -3,12 +3,26 @@ version: '2'
 services:
   web:
     image: nginx:alpine
+    links:
+      - django 
     ports:
       - "8080:80"
       - "8443:443"
     volumes:
       - ./nginx/web/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/web/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/data/html:/var/www/html
+    volumes_from:
+      - django 
+
+  django:
+    build: ./django/webapp/.
+    command: /uwsgi.sh 
+    ports:
+      - "5000:5000"
+    volumes: 
+      - ./django/webapp/static:/static
+      - ./django/webapp/media:/media
 
   pytest:
     build:
