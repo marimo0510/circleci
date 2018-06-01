@@ -1,12 +1,27 @@
 version: 2
 jobs:
   build:
-    machine: true 
+    machine: true
     steps:
       - checkout
       - run:
-            name: docker-compose up
+            name: up
             command: |
-                pip install pytest requests
-                docker-compose -f ./nginx/docker-compose.yml up -d
-                pytest
+                docker-compose -f ./docker-compose.yml up -d web
+  test:
+    machine: true
+    steps:
+      - checkout
+      - run:
+            name: test
+            command: |
+                docker-compose -f ./docker-compose.yml up -d pytest
+                docker-compose -f ./docker-compose.yml logs pytest
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build

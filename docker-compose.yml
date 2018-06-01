@@ -1,26 +1,33 @@
 version: '2'
 
-volumes:
-  config: 
-  data: 
-  logs: 
-
 services:
-  gitlab:
-    image: 'gitlab/gitlab-ce:latest'
-    restart: always
-    hostname: 'gitlab.example.com'
-    environment:
-      GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://gitlab.example.com'
-      GITLAB_ROOT_PASSWORD: 'password'
-      GITLAB_ROOT_EMAIL: 'n_hime_love@yahoo.co.jp'
+  web:
+    image: nginx:alpine
+    links:
+      - django 
     ports:
-      - '8080:80'
-      - '8443:443'
-      - '22:22'
+      - "8080:80"
+      - "8443:443"
     volumes:
-      - 'config:/etc/gitlab'
-      - 'logs:/var/log/gitlab'
-      - 'data:/var/opt/gitlab'
+      - ./nginx/web/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/web/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/data/html:/var/www/html
+    volumes_from:
+      - django 
 
+  django:
+    build: ./django/webapp/.
+    command: /uwsgi.sh 
+    ports:
+      - "5000:5000"
+    volumes: 
+      - ./django/webapp/static:/static
+      - ./django/webapp/media:/media
+
+  pytest:
+    build:
+      context: test
+    volumes:
+      - ./test:/test
+    links:
+      - "web"
